@@ -10,6 +10,7 @@
 body {
   font-family: var(--poppins);
   -webkit-tap-highlight-color: transparent;
+  background-color: var(--ui-background);
 }
 
 a {
@@ -20,6 +21,7 @@ a {
   width: 100%;
   display: flex;
   flex-direction: column;
+  background-color: var(--ui-background);
 
   .img-container {
     width: 100%;
@@ -113,7 +115,7 @@ a {
   --ui-blue: rgba(87, 235, 255, 0.38);
 
   /* UI Colors */
-  --ui-background: #EDEDED;
+  --ui-background: #f4f4f4;
   --ui-dark-bg: #121212;
   --ui-gray-bg: #f1f1f1;
   --home-card: #f4f4f4;

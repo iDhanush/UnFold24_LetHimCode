@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 24px 60px;
-    background-color: #ffffffab;
+    background-color: var(--ui-background);
     backdrop-filter: blur(5px);
     z-index: 100;
     position: relative;

@@ -28,6 +28,12 @@ const ChatPage = () => {
           </div>
           <div className="ai-txt">Building Your Project</div>
         </div>
+        <div className="ai-generation-box">
+          <div className="gen-txt">Generating Comment</div>
+          <div className="gen-detail">
+            Fetching code from server and executing ...
+          </div>
+        </div>
       </div>
       <div className="right-box">
         <div className="terminal-ui">
