@@ -42,3 +42,24 @@
 .content{
     padding: 10px;
 }
+
+.ai-res{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ai-logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border: 1px solid #E3E4E7;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.ai-txt{
+    font-size: 20px;
+    font-weight: 500;
+}
