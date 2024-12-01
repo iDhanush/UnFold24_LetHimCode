@@ -7,8 +7,11 @@ import TAB04 from "../../assets/images/tab04.png";
 //gsap
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useState } from "react";
+import Popup from "../popup/Popup";
 
 const Hero = () => {
+  const [popup, setPopup] = useState(false);
   //gsap
   useGSAP(() => {
     const tl = gsap.timeline();
@@ -65,9 +68,10 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <button onClick={() => createProfile()} className="create-btn">
+      <button onClick={() => setPopup(!popup)} className="create-btn">
         Build Project
       </button>
+      {popup && <Popup setPopup={setPopup} popup={popup} />}
     </div>
   );
 };
