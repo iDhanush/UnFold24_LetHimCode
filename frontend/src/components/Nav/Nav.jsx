@@ -25,7 +25,7 @@ const Nav = () => {
               </clipPath>
             </defs>
           </svg>
-          Fam.ai
+          Deploy.ai
         </Link>
       </div>
       <div className="nav-right-container">

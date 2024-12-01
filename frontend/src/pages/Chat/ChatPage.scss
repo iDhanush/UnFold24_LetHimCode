@@ -1,0 +1,44 @@
+.chat-page {
+  width: 100%;
+  height: 80vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px 60px;
+}
+
+.right-box {
+  padding-left: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.terminal-ui {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 12.5px 12.5px 10px rgba(0, 0, 0, 0.015),
+    100px 100px 80px rgba(0, 0, 0, 0.03),
+    -100px 100px 80px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.terminal-top {   
+  width: 100%;
+  height: 50px;
+  background-color: var(--dark-btn);
+  color: #fff;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+  gap: 10px;
+}
+
+.content{
+    padding: 10px;
+}
