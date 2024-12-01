@@ -1,8 +1,39 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Nav.scss";
-
+import { useEffect, useState } from "react";
+import { useStore } from "../../context/StoreContext";
 const Nav = () => {
+  const { wallet, setWallet } = useStore();
+  const [walletAddress, setWalletAddress] = useState(null);
+  const [provider, setProvider] = useState(null);
+  useEffect(() => {
+    if (window.ethereum) {
+      setProvider(window.ethereum);
+    }
+  }, []);
+
+  const pollyConnect = () => {
+    const requestAccount = async () => {
+      if (provider) {
+        try {
+          const accounts = await provider.request({
+            method: "eth_requestAccounts",
+          });
+          setWalletAddress(accounts[0]);
+          setWallet(accounts[0]);
+          console.log(accounts[0]);
+          localStorage.setItem("wallet", accounts[0]);
+          localStorage.setItem("con", JSON.stringify("polly"));
+        } catch (err) {
+          console.error("Error:", err);
+        }
+      } else {
+        console.log("MetaMask not detected");
+      }
+    };
+    requestAccount();
+  };
   return (
     <div className="nav-container">
       <div className="nav-left-container">
@@ -29,8 +60,8 @@ const Nav = () => {
         </Link>
       </div>
       <div className="nav-right-container">
-        <button onClick={() => console.log("heyy")} className="login-btn">
-          Login
+        <button onClick={() => pollyConnect()} className="login-btn">
+          {wallet ? `${wallet.substring(0, 8)}xxxxx` : "Login"}
         </button>
       </div>
     </div>
