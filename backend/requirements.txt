@@ -1,0 +1,12 @@
+fastapi~=0.115.5
+starlette~=0.41.3
+uvicorn~=0.23.2
+pydantic
+langchain-google-genai
+python-dotenv
+faiss-cpu
+langchain-community
+eth-brownie
+pyngrok
+pyngrok~=7.2.1
+nest-asyncio
