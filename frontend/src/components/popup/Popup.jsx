@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import TabSwitcher from "../TabSwitcher/TabSwitcher";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { setUp } from "../../utils/utils";
 
 const ostabs = [
   { id: 1, name: "windows" },
@@ -23,12 +24,14 @@ const Popup = ({ popup, setPopup }) => {
 
   const navigate = useNavigate();
 
-  const handleSubmitForm = () => {
+  const handleSubmitForm = async () => {
     if (privateKey.length > 0 && infuraKey.length > 0) {
-      console.log(osType, chainType, privateKey, infuraKey);
-      navigate('/chat');
-    }else{
-        toast.error("Please Enter Keys !")
+      const res = await setUp(osType, chainType, privateKey, infuraKey);
+      if (res) {
+        navigate("/chat");
+      }
+    } else {
+      toast.error("Please Enter Keys !");
     }
   };
   return (
