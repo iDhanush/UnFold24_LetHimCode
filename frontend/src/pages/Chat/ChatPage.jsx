@@ -1,20 +1,30 @@
 import React from "react";
 import "./ChatPage.scss";
-import { useEffect, useState,useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { baseUrl } from "../../constants";
 
 const ChatPage = () => {
   const [terminal, setTerminal] = useState([]);
   const bottomRef = useRef(null);
+  const prevTerminalRef = useRef([]);
 
   useEffect(() => {
-    if (bottomRef.current) {
-      bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+    // Only scroll if the terminal content has changed
+    if (
+      terminal.length !== prevTerminalRef.current.length ||
+      (terminal.length > 0 &&
+        JSON.stringify(terminal) !== JSON.stringify(prevTerminalRef.current))
+    ) {
+      if (bottomRef.current) {
+        bottomRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+      // Update the previous terminal content
+      prevTerminalRef.current = terminal;
     }
   }, [terminal]);
 
   useEffect(() => {
-    setInterval(async () => {
+    const intervalId = setInterval(async () => {
       try {
         const response = await fetch(`${baseUrl}/comm/shell`, {
           method: "GET",
@@ -37,7 +47,9 @@ const ChatPage = () => {
         console.error("terminal fetch error:", error);
       }
     }, 1000);
+    return () => clearInterval(intervalId);
   }, []);
+
   return (
     <div className="chat-page">
       <div className="left-box">
@@ -92,8 +104,8 @@ const ChatPage = () => {
             Terminal
           </div>
           <div className="content">
-            {terminal?.map((item) => (
-              <div className="terminal-out">
+            {terminal?.map((item, index) => (
+              <div key={index} className="terminal-out">
                 <div className="cmd-line">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -108,9 +120,7 @@ const ChatPage = () => {
                   </svg>
                   {item.cmd}
                 </div>
-                <div
-                className="res-line"
-                >{item.response}</div>
+                <div className="res-line">{item.response}</div>
               </div>
             ))}
             <div ref={bottomRef} />
