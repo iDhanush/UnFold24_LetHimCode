@@ -8,7 +8,7 @@ Deploy.ai is an **AI-powered autonomous agent** that simplifies and automates th
 
 - **AI-Driven Chatbot**: Guided interactions for deploying contracts with minimal user input.  
 - **Automated Deployment**: Handles compilation, deployment, and configuration seamlessly.  
-- **Blockchain Integration**: Supports networks like Polygon with metadata stored on decentralized platforms like IPFS.  
+- **Blockchain Integration**: Supports networks like Sepolia with metadata stored on decentralized platforms like IPFS.  
 - **Knowledge Base**: A repository of smart contract templates, deployment scripts, and configuration files.  
 - **Error Reduction**: Automates repetitive and error-prone tasks, ensuring secure and smooth deployments.  
 
