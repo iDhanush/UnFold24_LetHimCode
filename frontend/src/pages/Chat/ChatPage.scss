@@ -1,0 +1,145 @@
+.chat-page {
+  width: 100%;
+  height: 80vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px 60px;
+  background-color: var(--ui-background);
+}
+
+.right-box {
+  padding-left: 60px;
+  display: flex;
+  justify-content: center;
+}
+.terminal-ui {
+  width: 100%;
+  height: 100%;
+  max-height: 600px;
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 12.5px 12.5px 10px rgba(0, 0, 0, 0.015),
+    100px 100px 80px rgba(0, 0, 0, 0.03), -100px 100px 80px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.terminal-top {
+  width: 100%;
+  height: 50px;
+  background-color: var(--dark-btn);
+  color: #fff;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+  gap: 10px;
+}
+
+.left-box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.content {
+  padding: 10px 20px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.ai-res {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ai-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px solid #e3e4e7;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.ai-txt {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.ai-generation-box {
+  min-height: 50px;
+  max-width: 400px;
+  background-color: #ffffff;
+  border-left: 4px solid #020000;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+
+.gen-txt{
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--dark-btn);
+}
+
+.gen-detail{
+    font-weight: 400;
+    font-weight: 14px;
+    color: #454545;
+}
+
+.terminal-out{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cmd-line{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+}
+
+.res-line{
+  color: #4f4f4f;
+  font-size: 16px;
+  line-height: 2rem;
+}
+
+@media(max-width:1150px){
+  .right-box{
+    padding: 0px;
+  }
+}
+
+@media(max-width:970px){
+  .chat-page{
+    padding: 20px 40px;
+    gap: 40px;
+  }
+  .terminal-ui{
+    max-width: 500px;
+  }
+}
+
+@media(max-width:800px){
+  .chat-page{
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .terminal-ui{
+    max-width: 100%;
+  }
+}
