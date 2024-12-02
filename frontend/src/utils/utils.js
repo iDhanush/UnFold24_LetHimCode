@@ -1,6 +1,6 @@
 import { baseUrl } from "../constants";
 
-export const setUp = async (os, chain, privateKey, infuraKey) => {
+export const setUp = async (os, chain, privateKey, infuraKey, buildType) => {
   try {
     const response = await fetch(`${baseUrl}/comm/setup`, {
       method: "POST",
@@ -14,6 +14,7 @@ export const setUp = async (os, chain, privateKey, infuraKey) => {
         chain: chain,
         private_key: privateKey,
         infura_api_key: infuraKey,
+        build: buildType,
       }),
     });
 

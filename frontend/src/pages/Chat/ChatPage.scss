@@ -11,7 +11,6 @@
 .right-box {
   padding-left: 60px;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 .terminal-ui {
@@ -45,7 +44,7 @@
 .left-box {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 20px;
 }
 
 .content {
@@ -76,7 +75,7 @@
 }
 
 .ai-generation-box {
-  min-height: 120px;
+  min-height: 50px;
   max-width: 400px;
   background-color: #ffffff;
   border-left: 4px solid #020000;
@@ -89,8 +88,8 @@
 }
 
 .gen-txt{
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 400;
     color: var(--dark-btn);
 }
 

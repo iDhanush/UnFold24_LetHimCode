@@ -3,10 +3,13 @@ import "./ChatPage.scss";
 import { useEffect, useState, useRef } from "react";
 import { baseUrl } from "../../constants";
 
+import { ThreeDots } from "react-loader-spinner";
 const ChatPage = () => {
   const [terminal, setTerminal] = useState([]);
+  const [serverRes, setSereverRes] = useState([]);
   const bottomRef = useRef(null);
   const prevTerminalRef = useRef([]);
+  const[chatLoad,setchatLoad]=useState(false);
 
   useEffect(() => {
     if (
@@ -25,6 +28,7 @@ const ChatPage = () => {
   useEffect(() => {
     const intervalId = setInterval(async () => {
       try {
+        // setchatLoad(true);
         const response = await fetch(`${baseUrl}/comm/shell`, {
           method: "GET",
           headers: {
@@ -42,6 +46,35 @@ const ChatPage = () => {
         const result = await response.json();
         console.log("terminal done:", result.terminal);
         setTerminal(result.terminal);
+        console.log(result.terminal);
+        // setchatLoad(false);
+      } catch (error) {
+        console.error("terminal fetch error:", error);
+      }
+    }, 1000);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(async () => {
+      try {
+        const response = await fetch(`${baseUrl}/comm/ai_shell`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer your-auth-token",
+            "ngrok-skip-browser-warning": "69420",
+          },
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.msg || "can't get profiles");
+        }
+
+        const result = await response.json();
+        console.log("terminal done:", result.terminal);
+        setSereverRes(result.terminal);
       } catch (error) {
         console.error("terminal fetch error:", error);
       }
@@ -75,12 +108,11 @@ const ChatPage = () => {
           </div>
           <div className="ai-txt">Building Your Project</div>
         </div>
-        <div className="ai-generation-box">
-          <div className="gen-txt">Generating Comment</div>
-          <div className="gen-detail">
-            Fetching code from server and executing ...
+        {serverRes.map((item) => (
+          <div className="ai-generation-box">
+            <div className="gen-txt">{item}</div>
           </div>
-        </div>
+        ))}
       </div>
       <div className="right-box">
         <div className="terminal-ui">
@@ -103,6 +135,20 @@ const ChatPage = () => {
             Terminal
           </div>
           <div className="content">
+            {chatLoad && (
+              <div className="chat-load">
+                <ThreeDots
+                  visible={true}
+                  height="30"
+                  width="30"
+                  color="#000"
+                  radius="9"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                />
+              </div>
+            )}
             {terminal?.map((item, index) => (
               <div key={index} className="terminal-out">
                 <div className="cmd-line">

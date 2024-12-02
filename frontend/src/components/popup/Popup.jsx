@@ -21,15 +21,20 @@ const Popup = ({ popup, setPopup }) => {
   const [chainType, setChainType] = useState("base");
   const [privateKey, setPrivateKey] = useState("");
   const [infuraKey, setInfuraKey] = useState("");
+  const [buildType, setBuildType] = useState("");
 
   const navigate = useNavigate();
 
   const handleSubmitForm = async () => {
-    if (privateKey.length > 0 && infuraKey.length > 0) {
-      const res = await setUp(osType, chainType, privateKey, infuraKey);
-      if (res) {
-        navigate("/chat");
-      }
+    if (privateKey.length > 0 && infuraKey.length > 0 && buildType.length > 0) {
+      navigate("/chat");
+      const res = await setUp(
+        osType,
+        chainType,
+        privateKey,
+        infuraKey,
+        buildType
+      );
     } else {
       toast.error("Please Enter Keys !");
     }
@@ -67,6 +72,12 @@ const Popup = ({ popup, setPopup }) => {
           type: "spring",
         }}
       >
+        <div className="label">Select Build</div>
+        <input
+          type="text"
+          className="input-box"
+          onChange={(e) => setBuildType(e.target.value)}
+        />
         <div className="label">Select Chain</div>
         <TabSwitcher
           tabs={chaintabs}
