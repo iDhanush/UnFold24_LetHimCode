@@ -132,3 +132,9 @@
     cursor: pointer;
   
   }
+
+  @media(max-width:970px){
+    .nav-container{
+      padding: 20px 40px;
+    }
+  }

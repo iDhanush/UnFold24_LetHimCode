@@ -9,7 +9,6 @@ const ChatPage = () => {
   const prevTerminalRef = useRef([]);
 
   useEffect(() => {
-    // Only scroll if the terminal content has changed
     if (
       terminal.length !== prevTerminalRef.current.length ||
       (terminal.length > 0 &&
@@ -18,7 +17,7 @@ const ChatPage = () => {
       if (bottomRef.current) {
         bottomRef.current.scrollIntoView({ behavior: "smooth" });
       }
-      // Update the previous terminal content
+
       prevTerminalRef.current = terminal;
     }
   }, [terminal]);
@@ -120,7 +119,7 @@ const ChatPage = () => {
                   </svg>
                   {item.cmd}
                 </div>
-                <div className="res-line">{item.response}</div>
+                <div className="res-line">{item.res}</div>
               </div>
             ))}
             <div ref={bottomRef} />
