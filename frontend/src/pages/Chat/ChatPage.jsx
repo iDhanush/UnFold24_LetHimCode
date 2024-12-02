@@ -1,7 +1,43 @@
 import React from "react";
 import "./ChatPage.scss";
+import { useEffect, useState,useRef } from "react";
+import { baseUrl } from "../../constants";
 
 const ChatPage = () => {
+  const [terminal, setTerminal] = useState([]);
+  const bottomRef = useRef(null);
+
+  useEffect(() => {
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [terminal]);
+
+  useEffect(() => {
+    setInterval(async () => {
+      try {
+        const response = await fetch(`${baseUrl}/comm/shell`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer your-auth-token",
+            "ngrok-skip-browser-warning": "69420",
+          },
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.msg || "can't get profiles");
+        }
+
+        const result = await response.json();
+        console.log("terminal done:", result.terminal);
+        setTerminal(result.terminal);
+      } catch (error) {
+        console.error("terminal fetch error:", error);
+      }
+    }, 1000);
+  }, []);
   return (
     <div className="chat-page">
       <div className="left-box">
@@ -55,7 +91,30 @@ const ChatPage = () => {
             </svg>
             Terminal
           </div>
-          <div className="content">heyy</div>
+          <div className="content">
+            {terminal?.map((item) => (
+              <div className="terminal-out">
+                <div className="cmd-line">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={6}
+                    height={11}
+                    fill="none"
+                  >
+                    <path
+                      fill="#020000"
+                      d="M1.079 11a1.06 1.06 0 0 1-.961-.601 1.104 1.104 0 0 1 .487-1.481 7.95 7.95 0 0 0 3.069-2.771 1.17 1.17 0 0 0 0-1.29A8.16 8.16 0 0 0 .605 2.086C.061 1.822-.155 1.162.118.605A1.045 1.045 0 0 1 1.552.12a10.2 10.2 0 0 1 3.9 3.519 3.44 3.44 0 0 1 0 3.724 10.2 10.2 0 0 1-3.9 3.519 1.1 1.1 0 0 1-.473.117"
+                    />
+                  </svg>
+                  {item.cmd}
+                </div>
+                <div
+                className="res-line"
+                >{item.response}</div>
+              </div>
+            ))}
+            <div ref={bottomRef} />
+          </div>
         </div>
       </div>
     </div>
