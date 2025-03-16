@@ -2,6 +2,9 @@
 
 Deploy.ai is an **AI-powered autonomous agent** that simplifies and automates the deployment of smart contracts on blockchain networks. By requiring only essential user inputs, Deploy.ai streamlines the entire process, making blockchain technology more accessible to developers and non-technical users alike.  
 
+![Nethermind Logo](https://upload.wikimedia.org/wikipedia/commons/4/44/Nethermind_logo.svg)  
+![Coinbase Logo](https://upload.wikimedia.org/wikipedia/commons/0/07/Coinbase_logo.svg)
+
 ---
 
 ## **Features**  
