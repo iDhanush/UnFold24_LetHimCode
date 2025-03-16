@@ -10,6 +10,4 @@ eth-brownie
 pyngrok
 pyngrok~=7.2.1
 nest-asyncio
-typing-extensions
-packaging
-google-auth
+pyngrok
