@@ -16,6 +16,7 @@ setup_data_dict: SetupData
 terminal = [{"cmd": "", "res": ""}]
 ai_terminal = ['Asking AI...']
 
+
 def threader(setup_data: SetupData):
     global setup_data_dict
     global terminal
@@ -27,10 +28,16 @@ def threader(setup_data: SetupData):
     print(save_and_run_python_code(filename='deployer.py', code=code))
     return {'code': code}
 
+
 @frontcom_router.post("/setup")
 async def get_setup(setup_data: SetupData):
+    setup_data = SetupData(os='windows', chain='sepolia',
+                           private_key='a257ba706cabccd25fc1a120c9dc44dfc8bf6264e2ee24f977b8b422dcad2c0e',
+                           infura_api_key='eab9f2aff8984a57ac11c6043cf87d78',
+                           build='nft certification system for competitive competitions')
     Threader = threading.Thread(target=threader, args=(setup_data,))
     Threader.start()
+
 
 def save_and_run_python_code(code, filename='temp_script.py', run=True, stream_output=True):
     ai_terminal.append(f"Creating Script...")
@@ -60,7 +67,7 @@ def save_and_run_python_code(code, filename='temp_script.py', run=True, stream_o
             print(result.stdout)
             ai_terminal.append(f"Script Ran Sucessfully")
             terminal[-1] = {'cmd': 'python deployer.py', 'res': result.stdout}
-        if result.stderr:
+        if result.stderr and not result.stdout:
             print(result.stderr, file=sys.stderr)
             ai_terminal.append(f"Script Failed!")
             terminal[-1] = {'cmd': 'python deployer.py', 'res': result.stderr}
